@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>Практика 3_ Шевелева</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Погода в Самаре</h1>
+temp: <span id="Temp"></span> <br>
+pressure: <span id="Pressure"></span> <br>
+wind speed: <span id="Humidity"></span> <br>
+<script>
+  var settings = {
+    "url": "https://api.openweathermap.org/data/2.5/weather?q=Samara&units=metric&appid=cacdc35eaf804f98d919aba65f7630c9",
+    "method": "GET",
+    "timeout": 0,
+  };
+  $.ajax(settings).done(function (response){
+    console.log(response)
+  });
+  $.ajax(settings).done(function (response, xhr) {
+    console.log("Return Code: "+ xhr);
+    var content = response.main.temp;
+    $("#Temp").append(content + " градусов");
+    $("#Pressure").append(response.main.pressure );
+    $("#Humidity").append(response.wind.speed );
+  });
+</script>
+</body>
+</html>
+
